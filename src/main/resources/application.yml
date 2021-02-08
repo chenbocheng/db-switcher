@@ -5,8 +5,6 @@ server:
     context-path: /api
 
 logging:
-  file:
-    name: logs/ds-api.log
   level:
     com.expert.demo.dbswitcher: debug
 
