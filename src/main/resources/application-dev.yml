@@ -1,0 +1,15 @@
+
+spring:
+  jpa:
+    show-sql: true
+  datasource:
+    primary:
+      username: root
+      password: root
+      jdbcUrl: jdbc:mysql://192.168.100.11:3306/mms_primary?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+      driverClassName: com.mysql.cj.jdbc.Driver
+    replica:
+      username: root
+      password: root
+      jdbcUrl: jdbc:mysql://192.168.100.11:3306/mms_replica_alpha?useUnicode=true&characterEncoding=UTF-8&useSSL=false
+      driverClassName: com.mysql.cj.jdbc.Driver

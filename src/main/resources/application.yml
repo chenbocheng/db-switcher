@@ -1,0 +1,28 @@
+
+server:
+  port: 9901
+  servlet:
+    context-path: /api
+
+logging:
+  file:
+    name: logs/ds-api.log
+  level:
+    com.expert.demo.dbswitcher: debug
+
+spring:
+  profiles:
+    active: dev
+  output:
+    ansi:
+      enabled: ALWAYS
+  jackson:
+    default-property-inclusion: NON_NULL
+    date-format: yyyy-MM-dd HH:mm:ss
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: false
+    open-in-view: false
+    database: mysql
+    database-platform: org.hibernate.dialect.MySQL8Dialect
