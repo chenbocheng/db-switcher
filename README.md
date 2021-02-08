@@ -9,3 +9,4 @@ Simply 2 steps:
 2. With AOP to implement the ```DS``` annotation, 
 which can be used to methods in controller and service layers.
 
+Check ```com.expert.demo.dbswitcher.config``` for a quick look.
