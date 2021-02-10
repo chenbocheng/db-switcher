@@ -1,8 +1,8 @@
 package com.expert.demo.dbswitcher.config.db;
 
-
 import com.expert.demo.dbswitcher.config.annotation.DS;
 import lombok.extern.slf4j.Slf4j;
+import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 import org.aspectj.lang.annotation.Around;
 import org.aspectj.lang.annotation.Aspect;
@@ -24,19 +24,19 @@ public class DynamicDataSourceAspect {
     public Object around(ProceedingJoinPoint joinPoint) throws Throwable {
         String dsKey = getDSAnnotation(joinPoint).value();
         DataSourceKeyHolder.setKey(dsKey);
-        log.debug("DataSource PointCut: Switch to {}", dsKey);
+        log.debug("Around dataSourcePointCut: Switch to '{}'", dsKey);
         try {
             return joinPoint.proceed();
         } finally {
             DataSourceKeyHolder.clear();
-            log.debug("DataSource PointCut: {} closed", dsKey);
+            log.debug("Around dataSourcePointCut: '{}' clean", dsKey);
         }
     }
 
-    private DS getDSAnnotation(ProceedingJoinPoint joinPoint) {
+    private DS getDSAnnotation(JoinPoint joinPoint) {
         Class<?> targetClass = joinPoint.getTarget().getClass();
         DS dsAnnotation = targetClass.getAnnotation(DS.class);
-        // 先判断类的注解，再判断方法注解
+        // IMPORTANT: first type then method
         if (Objects.nonNull(dsAnnotation)) {
             return dsAnnotation;
         } else {
